@@ -4,43 +4,38 @@ import { useState } from 'react';
 
 export default function App() {
   
-  const [number1, setNumber1] = useState("");
-  const [number2, setNumber2] = useState("");
-  const [result, setResult] = useState (null)
+  const [number, setNumber] = useState("");
+  const [result, setResult] = useState ("")
+  const [guessCount, setGuessCount] = useState (0); // aloittaa laskun nollasta
+  const randomNumber = Math.floor(Math.random() * 100) + 1; // generoi random numeron
 
-  const plusPressed = () => {
-    const sum = parseFloat(number1) + parseFloat(number2);
-    setResult (sum)
-  };
+  // kun painiketta painetaan
+  const guessPressed = () => {
+    const guessedNumber = (number) ;
+    setGuessCount (guessCount + 1) // lisää yhden arvauksen lisää aina kun painiketta painaa
 
-  const miinusPressed = () => {
-    const difference = parseFloat(number1) - parseFloat(number2);
-    setResult(difference)
-  };
+    if (guessedNumber < randomNumber) {
+      setResult("Too low! Try again.");
+    } else if (guessedNumber > randomNumber) {
+      setResult("Too high! Try again.");
+    } else {
+      setResult(`Correct! You guessed the number in ${guessCount } guesses.`);
+    }
+
+    setNumber("");
   
-
-
+  };
 
   return (
     <View style={styles.container}>
       <Text>Result: {result !== null ? result : ""}</Text>
       <TextInput
-      placeholder='Anna ensimmäinen arvo'
-      onChangeText={number1 => setNumber1(number1)} 
-      value={number1}
+      placeholder='Guess a number between 1-100'
+      onChangeText={number => setNumber(number)} 
+      value={number}
       keyboardType='numeric'
       />
-
-    <TextInput
-      placeholder='Anna toinen arvo'
-      onChangeText={number2 => setNumber2(number2)} 
-      value={number2} 
-      keyboardType='numeric'
-      />
-
-      
-      <Button onPress={plusPressed} title="+"/>
-      <Button onPress={miinusPressed} title="-"/>
+      <Button onPress={guessPressed} title="Make guess"/>
       
       <StatusBar style="auto" />
     </View>
