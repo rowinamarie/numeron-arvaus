@@ -11,6 +11,7 @@ export default function App() {
 
   // kun painiketta painetaan
   const guessPressed = () => {
+    let newGuesses = guessCount +1// paikallinen muuttuja
     const guessedNumber = (number) ;
     setGuessCount (guessCount + 1) // lisää yhden arvauksen lisää aina kun painiketta painaa
 
@@ -19,11 +20,11 @@ export default function App() {
     } else if (guessedNumber > randomNumber) {
       setResult("Too high! Try again.");
     } else {
-      setResult(`Correct! You guessed the number in ${guessCount } guesses.`);
+      setResult(`Correct! You guessed the number in ${newGuesses } guesses.`);
     }
 
     setNumber("");
-  
+    setGuessCount (guessCount + 1) 
   };
 
   return (
