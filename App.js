@@ -24,7 +24,7 @@ export default function App() {
     }
 
     setNumber("");
-    setGuessCount (guessCount + 1) 
+    setGuessCount (newGuesses) 
   };
 
   return (
