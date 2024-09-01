@@ -3,41 +3,40 @@ import { StyleSheet, Text, View, Button, Alert, TextInput } from 'react-native';
 import { useState } from 'react';
 
 export default function App() {
-  
+
   const [number, setNumber] = useState("");
-  const [result, setResult] = useState ("")
-  const [guessCount, setGuessCount] = useState (0); // aloittaa laskun nollasta
+  const [result, setResult] = useState("");
+  const [guessCount, setGuessCount] = useState(0); // aloittaa laskun nollasta
   const randomNumber = Math.floor(Math.random() * 100) + 1; // generoi random numeron
 
   // kun painiketta painetaan
   const guessPressed = () => {
-    let newGuesses = guessCount +1// paikallinen muuttuja
-    const guessedNumber = (number) ;
-    setGuessCount (guessCount + 1) // lisää yhden arvauksen lisää aina kun painiketta painaa
+    let newGuesses = guessCount + 1// paikallinen muuttuja
+    const guessedNumber = (number);
 
     if (guessedNumber < randomNumber) {
       setResult("Too low! Try again.");
     } else if (guessedNumber > randomNumber) {
       setResult("Too high! Try again.");
     } else {
-      setResult(`Correct! You guessed the number in ${newGuesses } guesses.`);
+      setResult(`Correct! You guessed the number in ${newGuesses} guesses.`);
     }
 
     setNumber("");
-    setGuessCount (newGuesses) 
+    setGuessCount(newGuesses)
   };
 
   return (
     <View style={styles.container}>
       <Text>Result: {result !== null ? result : ""}</Text>
       <TextInput
-      placeholder='Guess a number between 1-100'
-      onChangeText={number => setNumber(number)} 
-      value={number}
-      keyboardType='numeric'
+        placeholder='Guess a number between 1-100'
+        onChangeText={number => setNumber(number)}
+        value={number}
+        keyboardType='numeric'
       />
-      <Button onPress={guessPressed} title="Make guess"/>
-      
+      <Button onPress={guessPressed} title="Make guess" />
+
       <StatusBar style="auto" />
     </View>
   );
